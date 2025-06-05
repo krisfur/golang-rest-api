@@ -44,12 +44,10 @@ var (
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
-
 	// Initialize 9 datasets at startup
 	numCharts := 9
 	currentDatasets = make([][]DataPoint, numCharts)
-	for i := 0; i < numCharts; i++ {
+	for i := range numCharts {
 		currentDatasets[i] = generateData(100, rand.Intn(5)+2)
 	}
 
@@ -144,7 +142,7 @@ func parallelCluster(datasets [][]DataPoint, k int) []APIResult {
 
 func generateData(n, clusters int) []DataPoint {
 	data := make([]DataPoint, 0, n)
-	for i := 0; i < clusters; i++ {
+	for range clusters {
 		centerX := rand.Float64() * 100
 		centerY := rand.Float64() * 100
 		for j := 0; j < n/clusters; j++ {
@@ -160,7 +158,7 @@ func kMeans(data []DataPoint, k, maxIter int) ([]DataPoint, []ClusteredPoint, in
 	centroids := initializeCentroids(data, k)
 	assignments := make([]int, len(data))
 
-	for iter := 0; iter < maxIter; iter++ {
+	for iter := range maxIter {
 		for i, p := range data {
 			idx := closestCentroid(p, centroids)
 			assignments[i] = idx
@@ -174,7 +172,7 @@ func kMeans(data []DataPoint, k, maxIter int) ([]DataPoint, []ClusteredPoint, in
 			counts[idx]++
 		}
 
-		for i := 0; i < k; i++ {
+		for i := range k {
 			if counts[i] > 0 {
 				newCentroids[i].X /= float64(counts[i])
 				newCentroids[i].Y /= float64(counts[i])
@@ -213,7 +211,7 @@ func kMeans(data []DataPoint, k, maxIter int) ([]DataPoint, []ClusteredPoint, in
 func initializeCentroids(data []DataPoint, k int) []DataPoint {
 	centroids := make([]DataPoint, k)
 	perm := rand.Perm(len(data))
-	for i := 0; i < k; i++ {
+	for i := range k {
 		centroids[i] = data[perm[i]]
 	}
 	return centroids
