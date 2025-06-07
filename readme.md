@@ -1,5 +1,9 @@
 # Concurrent KMeans Lab
 
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)    ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white) 
+
+[![Go](https://img.shields.io/badge/Go-1.24.4-blue)](https://go.dev/)   [![Node.js](https://img.shields.io/badge/Node.js-22.15.1-brightgreen)](https://nodejs.org/)
+
 An interactive web app that demonstrates **concurrent KMeans clustering** in Go.  
 
 ![Screenshot](screenshot.png)
